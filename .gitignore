@@ -1,0 +1,38 @@
+# Bazel
+bazel-*
+
+# Temporary files
+*.pyc
+*.swp
+*.swo
+
+# Eclipse IDE files
+.project
+.cproject
+.settings
+.classpath
+
+# IntelliJ files
+.idea
+
+# VS Code files
+.vscode
+
+# Atom IDE files
+*.gch
+
+# Logs
+nohup.out
+*.bak
+*.stderr
+*.stdout
+
+# Doxygen
+docs/doxy-docs/build/
+docs/doxy-docs/xml/
+
+# python proto
+*_pb2.py
+
+# Bash Environment
+.dev_bash_hist
