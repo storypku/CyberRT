@@ -1,5 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
-load("//tools:cpplint.bzl", "cpplint")
+load("//tools/bazel:cpplint.bzl", "cpplint")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -16,7 +16,7 @@ cc_library(
     hdrs = ["common_component_example.h"],
     deps = [
         "//cyber",
-        "//cyber/examples/proto:examples_cc_proto",
+        "//examples/proto:examples_cc_proto",
     ],
 )
 
@@ -25,7 +25,7 @@ cc_binary(
     srcs = ["channel_test_writer.cc"],
     deps = [
         "//cyber",
-        "//cyber/examples/proto:examples_cc_proto",
+        "//examples/proto:examples_cc_proto",
     ],
 )
 
@@ -34,7 +34,7 @@ cc_binary(
     srcs = ["channel_prediction_writer.cc"],
     deps = [
         "//cyber",
-        "//cyber/examples/proto:examples_cc_proto",
+        "//examples/proto:examples_cc_proto",
     ],
 )
 

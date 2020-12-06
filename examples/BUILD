@@ -1,5 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
-load("//tools:cpplint.bzl", "cpplint")
+load("//tools/bazel:cpplint.bzl", "cpplint")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -8,7 +8,7 @@ cc_binary(
     srcs = ["talker.cc"],
     deps = [
         "//cyber",
-        "//cyber/examples/proto:examples_cc_proto",
+        "//examples/proto:examples_cc_proto",
     ],
 )
 
@@ -17,7 +17,7 @@ cc_binary(
     srcs = ["listener.cc"],
     deps = [
         "//cyber",
-        "//cyber/examples/proto:examples_cc_proto",
+        "//examples/proto:examples_cc_proto",
     ],
 )
 
@@ -35,7 +35,7 @@ cc_binary(
     srcs = ["service.cc"],
     deps = [
         "//cyber",
-        "//cyber/examples/proto:examples_cc_proto",
+        "//examples/proto:examples_cc_proto",
     ],
 )
 
