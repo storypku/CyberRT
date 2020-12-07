@@ -13,19 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
-#include <memory>
 
-#include "cyber/component/component.h"
-#include "examples/proto/examples.pb.h"
+#include "examples/proto/chatter.pb.h"
 
-using apollo::cyber::Component;
-using apollo::cyber::ComponentBase;
-using apollo::cyber::examples::proto::Driver;
+#include "cyber/cyber.h"
 
-class CommonComponentSample : public Component<Driver, Driver> {
- public:
-  bool Init() override;
-  bool Proc(const std::shared_ptr<Driver>& msg0,
-            const std::shared_ptr<Driver>& msg1) override;
-};
-CYBER_REGISTER_COMPONENT(CommonComponentSample)
+using examples::proto::Chatter;
+
+void MessageCallback(const std::shared_ptr<Chatter>& msg) {
+  AINFO << "Received message:\n\theader.seq: " << msg->header().seq()
+        << "\n\tcontent: " << msg->content();
+}
+
+int main(int argc, char* argv[]) {
+  // init cyber framework
+  apollo::cyber::Init(argv[0]);
+  // create listener node
+  auto listener_node = apollo::cyber::CreateNode("listener");
+  // create listener
+  auto listener =
+      listener_node->CreateReader<Chatter>("channel/chatter", MessageCallback);
+  apollo::cyber::WaitForShutdown();
+  return 0;
+}

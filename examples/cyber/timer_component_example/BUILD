@@ -16,7 +16,7 @@ cc_library(
     hdrs = ["timer_component_example.h"],
     deps = [
         "//cyber",
-        "//examples/proto:examples_cc_proto",
+        "//examples/proto:driver_cc_proto",
     ],
 )
 

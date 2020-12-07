@@ -29,7 +29,8 @@ def test_client_class():
     Client send request
     """
     node = cyber.Node("client_node")
-    client = node.create_client("server_01", ChatterBenchmark, ChatterBenchmark)
+    client = node.create_client(
+        "server_01", ChatterBenchmark, ChatterBenchmark)
     req = ChatterBenchmark()
     req.content = "clt:Hello service!"
     req.seq = 0

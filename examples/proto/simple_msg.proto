@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+import "examples/proto/header.proto";
+
+package examples.proto;
+
+message SimpleMessage {
+  optional Header header = 1;
+  optional int32 integer = 2;
+  optional string text = 3;
+}
+
+message SimpleRepeatedMessage {
+  repeated SimpleMessage message = 1;
+}

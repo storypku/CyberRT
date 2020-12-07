@@ -1,6 +1,5 @@
 # Common Component Example of the CyberRT framework
 
-
 ## How to Build
 
 ```
@@ -51,5 +50,3 @@ bazel run //examples/common_component_example:channel_prediction_writer
 ```
 
 Now you should see console output of the `CommonComponentSample` example from the first terminal.
-
-

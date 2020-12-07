@@ -39,6 +39,7 @@ AtomicHashMap<uint64_t, std::string, 256> GlobalData::task_id_map_;
 
 namespace {
 const std::string& kEmptyString = "";
+
 std::string program_path() {
   char path[PATH_MAX];
   auto len = readlink("/proc/self/exe", path, sizeof(path) - 1);

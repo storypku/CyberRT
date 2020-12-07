@@ -13,24 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
+#include <memory>
 
-#include "examples/timer_component_example/timer_component_example.h"
+#include "examples/proto/driver.pb.h"
 
 #include "cyber/class_loader/class_loader.h"
 #include "cyber/component/component.h"
-#include "examples/proto/examples.pb.h"
+#include "cyber/component/timer_component.h"
 
-bool TimerComponentSample::Init() {
-  driver_writer_ = node_->CreateWriter<Driver>("/carstatus/channel");
-  return true;
-}
+using apollo::cyber::Component;
+using apollo::cyber::ComponentBase;
+using apollo::cyber::TimerComponent;
+using apollo::cyber::Writer;
+using examples::proto::Driver;
 
-bool TimerComponentSample::Proc() {
-  static int i = 0;
-  auto out_msg = std::make_shared<Driver>();
-  out_msg->set_msg_id(i++);
-  driver_writer_->Write(out_msg);
-  AINFO << "timer_component_example: Write drivermsg->"
-        << out_msg->ShortDebugString();
-  return true;
-}
+class TimerComponentSample : public TimerComponent {
+ public:
+  bool Init() override;
+  bool Proc() override;
+
+ private:
+  std::shared_ptr<Writer<Driver>> driver_writer_ = nullptr;
+};
+CYBER_REGISTER_COMPONENT(TimerComponentSample)

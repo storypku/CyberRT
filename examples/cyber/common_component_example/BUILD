@@ -16,7 +16,7 @@ cc_library(
     hdrs = ["common_component_example.h"],
     deps = [
         "//cyber",
-        "//examples/proto:examples_cc_proto",
+        "//examples/proto:driver_cc_proto",
     ],
 )
 
@@ -25,7 +25,7 @@ cc_binary(
     srcs = ["channel_test_writer.cc"],
     deps = [
         "//cyber",
-        "//examples/proto:examples_cc_proto",
+        "//examples/proto:driver_cc_proto",
     ],
 )
 
@@ -34,7 +34,7 @@ cc_binary(
     srcs = ["channel_prediction_writer.cc"],
     deps = [
         "//cyber",
-        "//examples/proto:examples_cc_proto",
+        "//examples/proto:driver_cc_proto",
     ],
 )
 

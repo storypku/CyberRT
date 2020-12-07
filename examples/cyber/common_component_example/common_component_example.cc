@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
-#include "examples/common_component_example/common_component_example.h"
+#include "examples/cyber/common_component_example/common_component_example.h"
 
 bool CommonComponentSample::Init() {
   AINFO << "Commontest component init";
@@ -22,7 +22,7 @@ bool CommonComponentSample::Init() {
 
 bool CommonComponentSample::Proc(const std::shared_ptr<Driver>& msg0,
                                  const std::shared_ptr<Driver>& msg1) {
-  AINFO << "Start common component Proc [" << msg0->msg_id() << "] ["
-        << msg1->msg_id() << "]";
+  AINFO << "Start common component Proc [" << msg0->header().seq() << "] ["
+        << msg1->header().seq() << "]";
   return true;
 }

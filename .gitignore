@@ -26,6 +26,7 @@ nohup.out
 *.bak
 *.stderr
 *.stdout
+data/log/*
 
 # Doxygen
 docs/doxy-docs/build/
@@ -36,3 +37,4 @@ docs/doxy-docs/xml/
 
 # Bash Environment
 .dev_bash_hist
+

@@ -24,7 +24,6 @@ import unittest
 from cyber_py3 import cyber
 from modules.common.util.testdata.simple_pb2 import SimpleMessage
 
-
 class TestCyber(unittest.TestCase):
     """
     Class for node unit test.

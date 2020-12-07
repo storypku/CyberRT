@@ -14,33 +14,34 @@
  * limitations under the License.
  *****************************************************************************/
 
+#include "examples/proto/chatter.pb.h"
+
 #include "cyber/cyber.h"
-#include "examples/proto/examples.pb.h"
 #include "cyber/time/rate.h"
 #include "cyber/time/time.h"
 
 using apollo::cyber::Rate;
 using apollo::cyber::Time;
-using apollo::cyber::examples::proto::Driver;
+using examples::proto::Chatter;
 
 int main(int argc, char *argv[]) {
   // init cyber framework
   apollo::cyber::Init(argv[0]);
   // create talker node
-  auto talker_node = apollo::cyber::CreateNode("channel_test_writer");
+  auto talker_node = apollo::cyber::CreateNode("talker");
   // create talker
-  auto talker = talker_node->CreateWriter<Driver>("/apollo/test");
-  Rate rate(2.0);
-
-  std::string content("apollo_test");
+  auto talker = talker_node->CreateWriter<Chatter>("channel/chatter");
+  Rate rate(1.0);
+  uint64_t seq = 0;
   while (apollo::cyber::OK()) {
-    static uint64_t seq = 0;
-    auto msg = std::make_shared<Driver>();
-    msg->set_timestamp(Time::Now().ToNanosecond());
-    msg->set_msg_id(seq++);
-    msg->set_content(content + std::to_string(seq - 1));
+    auto msg = std::make_shared<Chatter>();
+    auto header = msg->mutable_header();
+    header->set_timestamp(Time::Now().ToNanosecond());
+    header->set_seq(seq);
+    msg->set_content("Hello, apollo!");
     talker->Write(msg);
-    AINFO << "/apollo/test sent message, seq=" << (seq - 1) << ";";
+    AINFO << "talker sent a message! No. " << seq;
+    seq++;
     rate.Sleep();
   }
   return 0;
