@@ -37,11 +37,11 @@ const char PROTO_DESC[] = "1234567890";
 const char STR_10B[] = "1234567890";
 const char TEST_FILE[] = "test.record";
 
-void test_write(const std::string &writefile) {
+static void test_write(const std::string& output_file) {
   RecordWriter writer;
   writer.SetSizeOfFileSegmentation(0);
   writer.SetIntervalOfFileSegmentation(0);
-  writer.Open(writefile);
+  writer.Open(output_file);
   writer.WriteChannel(CHANNEL_NAME_1, MESSAGE_TYPE_1, PROTO_DESC);
   for (uint32_t i = 0; i < 100; ++i) {
     auto msg = std::make_shared<RawMessage>("abc" + std::to_string(i));
@@ -50,29 +50,29 @@ void test_write(const std::string &writefile) {
   writer.Close();
 }
 
-void test_read(const std::string &readfile) {
+static void test_read(const std::string &readfile) {
   RecordReader reader(readfile);
   RecordMessage message;
-  uint64_t msg_count = reader.GetMessageNumber(CHANNEL_NAME_1);
+  uint64_t total = reader.GetMessageNumber(CHANNEL_NAME_1);
   AINFO << "MSGTYPE: " << reader.GetMessageType(CHANNEL_NAME_1);
   AINFO << "MSGDESC: " << reader.GetProtoDesc(CHANNEL_NAME_1);
 
   // read all message
   uint64_t i = 0;
   uint64_t valid = 0;
-  for (i = 0; i < msg_count; ++i) {
+  for (i = 0; i < total; ++i) {
     if (reader.ReadMessage(&message)) {
-      AINFO << "msg[" << i << "]-> "
+      AINFO << "Msg[" << i << "]-> "
             << "channel name: " << message.channel_name
             << "; content: " << message.content
             << "; msg time: " << message.time;
       valid++;
     } else {
-      AERROR << "read msg[" << i << "] failed";
+      AERROR << "Read msg[" << i << "] failed";
     }
   }
-  AINFO << "static msg=================";
-  AINFO << "MSG validmsg:totalcount: " << valid << ":" << msg_count;
+  AINFO << "Msg Stats:";
+  AINFO << "\tValid/Total: " << valid << "/" << total;
 }
 
 int main(int argc, char *argv[]) {

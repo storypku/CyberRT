@@ -37,8 +37,8 @@ cc_test(
     size = "small",
     srcs = ["class_loader_test.cc"],
     data = [
-        "//cyber/class_loader/test:plugin1",
-        "//cyber/class_loader/test:plugin2",
+        "//cyber/class_loader/test:libplugin1.so",
+        "//cyber/class_loader/test:libplugin2.so",
     ],
     deps = [
         "//cyber",

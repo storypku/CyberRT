@@ -52,15 +52,23 @@ Scheduler* Instance() {
     std::lock_guard<std::mutex> lock(mutex);
     obj = instance.load(std::memory_order_relaxed);
     if (obj == nullptr) {
-      std::string policy("classic");
-      std::string conf("conf/");
-      conf.append(GlobalData::Instance()->ProcessGroup()).append(".conf");
-      auto cfg_file = GetAbsolutePath(WorkRoot(), conf);
-      apollo::cyber::proto::CyberConfig cfg;
-      if (PathExists(cfg_file) && GetProtoFromFile(cfg_file, &cfg)) {
-        policy = cfg.scheduler_conf().policy();
+      std::string policy;
+      auto config_file = std::string("cyber/conf/") +
+                         GlobalData::Instance()->ProcessGroup() + ".conf";
+      apollo::cyber::proto::CyberConfig config;
+      if (PathExists(config_file) && GetProtoFromFile(config_file, &config)) {
+        AINFO << "Scheduler conf " << config_file << " found and used.";
+        policy = config.scheduler_conf().policy();
       } else {
-        AWARN << "No sched conf found, use default conf.";
+        auto config_path = GetAbsolutePath(WorkRoot(), config_file);
+        if (PathExists(config_path) && GetProtoFromFile(config_path, &config)) {
+          AINFO << "Scheduler conf " << config_path << " found and used.";
+          policy = config.scheduler_conf().policy();
+        } else {
+          policy = "classic";
+          AWARN << "No scheduler conf " << config_file
+                << " found, use default.";
+        }
       }
       if (!policy.compare("classic")) {
         obj = new SchedulerClassic();

@@ -25,8 +25,8 @@ using examples::proto::Driver;
 int main(int argc, char* argv[]) {
   apollo::cyber::Init(argv[0]);
 
-  std::shared_ptr<apollo::cyber::Node> node(
-      apollo::cyber::CreateNode("start_node"));
+  std::shared_ptr<apollo::cyber::Node> node =
+      apollo::cyber::CreateNode("service_example_node");
 
   auto server = node->CreateService<Driver, Driver>(
       "test_server", [](const std::shared_ptr<Driver>& request,
@@ -34,7 +34,8 @@ int main(int argc, char* argv[]) {
         auto seq = request->header().seq();
         response->mutable_header()->set_seq(seq + 1);
         response->mutable_header()->set_timestamp(Time::Now().ToNanosecond());
-        AINFO << "Received seq " << seq << " from client, sending response seq: " << (seq + 1);
+        AINFO << "Received request seq " << seq
+              << " from client, sending resp seq: " << (seq + 1);
       });
 
   auto client = node->CreateClient<Driver, Driver>("test_server");
@@ -48,9 +49,9 @@ int main(int argc, char* argv[]) {
     header->set_seq(id);
     auto res = client->SendRequest(driver_msg);
     if (res != nullptr) {
-      AINFO << "client: responese: " << res->ShortDebugString();
+      AINFO << "Client received responese: " << res->ShortDebugString();
     } else {
-      AINFO << "client: service may not ready.";
+      AINFO << "Client: service may not ready.";
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     id += 2;

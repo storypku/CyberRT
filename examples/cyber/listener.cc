@@ -21,8 +21,8 @@
 using examples::proto::Chatter;
 
 void MessageCallback(const std::shared_ptr<Chatter>& msg) {
-  AINFO << "Received message:\n\theader.seq: " << msg->header().seq()
-        << "\n\tcontent: " << msg->content();
+  AINFO << "Message received, header.seq: " << msg->header().seq()
+        << "\tcontent: " << msg->content();
 }
 
 int main(int argc, char* argv[]) {

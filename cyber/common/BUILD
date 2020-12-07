@@ -80,7 +80,7 @@ cc_library(
     srcs = ["global_data.cc"],
     hdrs = ["global_data.h"],
     data = [
-        "//cyber:cyber_conf",
+        "//cyber/conf:cyber.pb.conf",
     ],
     deps = [
         "//cyber/base:atomic_hash_map",

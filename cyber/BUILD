@@ -112,11 +112,4 @@ cc_library(
     ],
 )
 
-filegroup(
-    name = "cyber_conf",
-    srcs = glob([
-        "conf/*.conf",
-    ]),
-)
-
 cpplint()

@@ -155,9 +155,16 @@ void GlobalData::InitHostInfo() {
 }
 
 bool GlobalData::InitConfig() {
-  auto config_path = GetAbsolutePath(WorkRoot(), "conf/cyber.pb.conf");
+  std::string config_path("cyber/conf/cyber.pb.conf");
+  auto success = GetProtoFromFile(config_path, &config_);
+  if (success) {
+    AINFO << "Relative cyber/conf/cyber.pb.conf found and used.";
+    return true;
+  }
+
+  config_path = GetAbsolutePath(WorkRoot(), "conf/cyber.pb.conf");
   if (!GetProtoFromFile(config_path, &config_)) {
-    AERROR << "read cyber default conf failed!";
+    AERROR << "Read cyber/conf/cyber.pb.conf from absolute path failed!";
     return false;
   }
 

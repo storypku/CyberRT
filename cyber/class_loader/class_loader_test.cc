@@ -27,9 +27,10 @@
 #include "cyber/cyber.h"
 
 const char LIBRARY_1[] =
-    "/apollo/bazel-bin/cyber/class_loader/test/libplugin1.so";
+    "cyber/class_loader/test/libplugin1.so";
 const char LIBRARY_2[] =
-    "/apollo/bazel-bin/cyber/class_loader/test/libplugin2.so";
+    "cyber/class_loader/test/libplugin2.so";
+
 using apollo::cyber::class_loader::ClassLoader;
 using apollo::cyber::class_loader::ClassLoaderManager;
 using apollo::cyber::class_loader::utility::IsLibraryLoadedByAnybody;

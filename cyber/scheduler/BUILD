@@ -141,6 +141,9 @@ cc_test(
         "//cyber/scheduler:scheduler_factory",
         "@com_google_googletest//:gtest_main",
     ],
+    data = [
+        "//cyber/conf:example_sched_conf",
+    ],
 )
 
 cc_test(

@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 TOP_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
-export CYBER_PATH=${TOP_DIR}/cyber
+export CYBER_PATH=${TOP_DIR}
 
 # export PYTHONPATH=${bazel_bin_path}/cyber_py3/internal:${PYTHONPATH}
 

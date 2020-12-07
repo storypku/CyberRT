@@ -9,9 +9,11 @@ cc_library(
     hdrs = ["base.h"],
 )
 
-cc_library(
-    name = "plugin1",
+cc_binary(
+    name = "libplugin1.so",
     testonly = True,
+    linkshared = True,
+    linkstatic = False,
     srcs = ["plugin1.cc"],
     deps = [
         ":base",
@@ -19,9 +21,11 @@ cc_library(
     ],
 )
 
-cc_library(
-    name = "plugin2",
+cc_binary(
+    name = "libplugin2.so",
     testonly = True,
+    linkshared = True,
+    linkstatic = False,
     srcs = ["plugin2.cc"],
     deps = [
         ":base",

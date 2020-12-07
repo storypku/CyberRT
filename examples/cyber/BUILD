@@ -10,6 +10,10 @@ cc_binary(
         "//cyber",
         "//examples/proto:chatter_cc_proto",
     ],
+    data = [
+        "//cyber/conf:compute_sched_conf",
+        ],
+
 )
 
 cc_binary(
