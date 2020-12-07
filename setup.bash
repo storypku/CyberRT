@@ -3,6 +3,18 @@
 TOP_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
 export CYBER_PATH=${TOP_DIR}
 
+# Prevent multiple entries of my_path in PATH
+function add_to_path() {
+    if [ -z "$1" ]; then
+        return
+    fi
+    local my_path="$1"
+    if [ -n "${PATH##*${my_path}}" ] && [ -n "${PATH##*${my_path}:*}" ]; then
+        export PATH=$PATH:${my_path}
+    fi
+}
+
+add_to_path "${TOP_DIR}/bazel-bin/cyber_py3/tools"
 # export PYTHONPATH=${bazel_bin_path}/cyber_py3/internal:${PYTHONPATH}
 
 export CYBER_DOMAIN_ID=80
