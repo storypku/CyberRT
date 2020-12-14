@@ -8,7 +8,6 @@ cc_library(
     name = "PocoFoundation",
     includes = ["."],
     linkopts = [
-        "-L/opt/apollo/sysroot/lib",
         "-lPocoFoundation",
     ],
 )

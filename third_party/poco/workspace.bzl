@@ -10,5 +10,5 @@ def repo():
     native.new_local_repository(
         name = "poco",
         build_file = clean_dep("//third_party/poco:poco.BUILD"),
-        path = "/opt/apollo/sysroot/include",
+        path = "/usr/include",
     )
