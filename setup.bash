@@ -3,6 +3,7 @@
 TOP_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
 export CYBER_PATH=${TOP_DIR}
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/fast-rtps/lib
 # Prevent multiple entries of my_path in PATH
 function add_to_path() {
     if [ -z "$1" ]; then
