@@ -47,10 +47,6 @@ http_archive(
     ],
 )
 
-load("@rules_python//python:pip.bzl", "pip_repositories")
-
-pip_repositories()
-
 http_archive(
     name = "com_github_grpc_grpc",
     sha256 = "7372a881122cd85a7224435a1d58bc5e11c88d4fb98a64b83f36f3d1c2f16d39",
