@@ -1,5 +1,6 @@
 # Bazel
 bazel-*
+user.bazelrc
 
 # Temporary files
 *.pyc

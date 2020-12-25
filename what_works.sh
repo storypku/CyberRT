@@ -8,4 +8,4 @@ bazel build //examples/...
 
 ## TODOs
 # 1) cyber_visualizer
-
+# 2) release build
