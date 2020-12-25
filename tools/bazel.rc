@@ -41,6 +41,7 @@ build:c++1z --config=c++17
 build --cxxopt="-std=c++14"
 build --host_cxxopt="-std=c++14"
 
+# test --test_env=PYTHONPATH
 # +------------------------------------------------------------+
 # | CPP Lint Tests & Unit Tests                                |
 # +------------------------------------------------------------+

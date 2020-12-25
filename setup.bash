@@ -18,7 +18,7 @@ function add_to_path() {
 add_to_path "${TOP_DIR}/bazel-bin/cyber_py3/tools"
 add_to_path "${TOP_DIR}/bazel-bin/cyber/mainboard"
 
-# export PYTHONPATH=${bazel_bin_path}/cyber_py3/internal:${PYTHONPATH}
+export PYTHONPATH=${TOP_DIR}/bazel-bin:$PYTHONPATH
 
 export CYBER_DOMAIN_ID=80
 export CYBER_IP=127.0.0.1

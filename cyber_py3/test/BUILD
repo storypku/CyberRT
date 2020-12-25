@@ -20,15 +20,16 @@ py_test(
     ],
 )
 
-#py_test(
-#    name = "cyber_test",
-#    timeout = "short",
-#    srcs = ["cyber_test.py"],
-#    deps = [
-#        "//cyber_py3:cyber",
-#        "//modules/common/util/testdata:simple_py_pb2",
-#    ],
-#)
+py_test(
+    name = "cyber_test",
+    timeout = "short",
+    srcs = ["cyber_test.py"],
+    deps = [
+        "//cyber_py3:cyber",
+        "//examples/proto:simple_msg_py_pb2",
+    ],
+)
+
 # FIXME(all): parameter_test seems to run forever
 # py_test(
 #    name = "parameter_test",
