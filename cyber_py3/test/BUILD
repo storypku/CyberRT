@@ -1,15 +1,15 @@
 load("@rules_python//python:defs.bzl", "py_test")
 
-#py_test(
-#    name = "record_test",
-#    timeout = "short",
-#    srcs = ["record_test.py"],
-#    deps = [
-#        "//cyber/proto:record_py_pb2",
-#        "//cyber_py3:record",
-#        "//modules/common/util/testdata:simple_py_pb2",
-#    ],
-#)
+py_test(
+    name = "record_test",
+    timeout = "short",
+    srcs = ["record_test.py"],
+    deps = [
+        "//cyber/proto:record_py_pb2",
+        "//cyber_py3:record",
+        "//examples/proto:simple_msg_py_pb2",
+    ],
+)
 
 py_test(
     name = "init_test",

@@ -22,12 +22,12 @@ import unittest
 
 from cyber.proto import record_pb2
 from cyber_py3 import record
-from modules.common.util.testdata.simple_pb2 import SimpleMessage
+from examples.proto.simple_msg_pb2 import SimpleMessage
 
 
 TEST_RECORD_FILE = "/tmp/test02.record"
 CHAN_1 = "channel/chatter"
-MSG_TYPE = "apollo.common.util.test.SimpleMessage"
+MSG_TYPE = "examples.proto.SimpleMessage"
 PROTO_DESC = b"1234567890"
 MSG_DATA = b"0123456789"
 TIME = 999
