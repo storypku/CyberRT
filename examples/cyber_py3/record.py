@@ -20,7 +20,7 @@
 Module for example of record.
 
 Run with:
-    bazel run //cyber_py3/cyber_py3/examples:record
+    bazel run //examples/cyber_py3:record
 """
 
 import time
@@ -29,12 +29,10 @@ from google.protobuf.descriptor_pb2 import FileDescriptorProto
 
 from cyber.proto.unit_test_pb2 import Chatter
 from cyber_py3 import record
-from modules.common.util.testdata.simple_pb2 import SimpleMessage
+from examples.proto.simple_msg_pb2 import SimpleMessage
 
-
-MSG_TYPE = "apollo.common.util.test.SimpleMessage"
+MSG_TYPE = "examples.proto.SimpleMessage"
 MSG_TYPE_CHATTER = "apollo.cyber.proto.Chatter"
-
 
 def test_record_writer(writer_path):
     """
@@ -60,9 +58,9 @@ def test_record_writer(writer_path):
     desc_str = proto.SerializeToString()
     print(msg.DESCRIPTOR.full_name)
     fwriter.write_channel(
-        'simplemsg_channel', msg.DESCRIPTOR.full_name, desc_str)
-    fwriter.write_message('simplemsg_channel', msg, 990, False)
-    fwriter.write_message('simplemsg_channel', msg.SerializeToString(), 991)
+        'simple_msg', msg.DESCRIPTOR.full_name, desc_str)
+    fwriter.write_message('simple_msg', msg, 990, False)
+    fwriter.write_message('simple_msg', msg.SerializeToString(), 991)
 
     # Writer 2 Chatter
     msg = Chatter()
@@ -101,7 +99,7 @@ def test_record_reader(reader_path):
         print('msgtime -> %d' % timestamp)
         print('msgnum -> %d' % freader.get_messagenumber(channel_name))
         print('msgtype -> %s' % datatype)
-        print('message is -> %s' % msg)
+        print('message is -> {}'.format(msg))
         print('***After parse(if needed),the message is ->')
         if datatype == MSG_TYPE:
             msg_new = SimpleMessage()
