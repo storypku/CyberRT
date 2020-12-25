@@ -27,7 +27,8 @@ IncludeCategories:
   # Protobuf Files
   - Regex:       '\.pb\.h'
     Priority:    6
-  - Regex:       '^"(cyber|examples)'
+  # CyberRT stuff
+  - Regex:       '^"(cyber|examples|cyber_py3)'
     Priority:    7
   # The rest
   - Regex:       '.*'
