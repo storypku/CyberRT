@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 bazel build //cyber/...
 bazel test //cyber/...
@@ -8,4 +9,7 @@ bazel build //examples/...
 
 ## TODOs
 # 1) cyber_visualizer
-# 2) release build
+# 2) cyber release build
+# 3) Reorg docs
+# 4) ROS 1/2 Inter-Op
+
