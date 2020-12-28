@@ -7,7 +7,6 @@ load("//third_party/gflags:workspace.bzl", gflags = "repo")
 load("//third_party/glog:workspace.bzl", glog = "repo")
 load("//third_party/gtest:workspace.bzl", gtest = "repo")
 load("//third_party/ncurses:workspace.bzl", ncurses = "repo")
-load("//third_party/poco:workspace.bzl", poco = "repo")
 load("//third_party/protobuf:workspace.bzl", protobuf = "repo")
 load("//third_party/uuid:workspace.bzl", uuid = "repo")
 
@@ -23,7 +22,6 @@ def initialize_3rd_party_libs():
     glog()
     gtest()
     ncurses()
-    poco()
     protobuf()
     uuid()
 
