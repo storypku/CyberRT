@@ -21,7 +21,6 @@
 from cyber_py3 import cyber
 from cyber_py3 import parameter
 
-
 PARAM_SERVICE_NAME = "global_parameter_service"
 
 

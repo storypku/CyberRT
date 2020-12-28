@@ -14,7 +14,7 @@ pathprepend /usr/local/fast-rtps/lib LD_LIBRARY_PATH
 # TODO(storypku):
 #   Revisit for external projects that depend on CyberRT
 pathprepend ${BAZEL_BIN_DIR} PYTHONPATH
-# pathprepend ${BAZEL_BIN_DIR}/cyber_py3/internal PYTHONPATH
+pathprepend ${BAZEL_BIN_DIR}/cyber_py3/internal PYTHONPATH
 
 export CYBER_DOMAIN_ID=80
 export CYBER_IP=127.0.0.1
