@@ -33,12 +33,20 @@ Key benefits of using Apollo Cyber RT:
 
 You can run the following command to install CyberRT pre-requisites:
 
-```
+```bash
 bash tools/install/install_prereqs.sh
 ```
 
 `sudo` privilege is needed, and by default Fast-DDS is installed under
 `/usr/local/fast-rtps/`.
+
+## Build
+
+```bash
+source setup.bash
+bazel build //...
+bazel test //...
+```
 
 ## Release Build
 
@@ -46,12 +54,6 @@ Binary releases for CyberRT is still a Work-In-Progress. Contribution is highly
 appreciated.
 
 # Documents
-
-- **_New!!_**
-  [How to Develop Cyber RT inside Docker Environment on Both x86 and ARM Platform](https://github.com/ApolloAuto/apollo/tree/master/docs/cyber/CyberRT_Docker.md):
-  Official docker image for Cyber RT development, which is easiest way to build
-  and play with Cyber RT. On top of that, we officially support development of
-  Cyber RT on both x86 and ARM platform.
 
 - [Apollo Cyber RT Quick Start](https://github.com/ApolloAuto/apollo/tree/master/docs/cyber/CyberRT_Quick_Start.md):
   Everything you need to know about how to start developing your first
