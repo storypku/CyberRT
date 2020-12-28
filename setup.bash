@@ -9,6 +9,9 @@ BAZEL_BIN_DIR="${TOP_DIR}/bazel-bin"
 
 pathprepend ${BAZEL_BIN_DIR}/cyber_py3/tools
 pathprepend ${BAZEL_BIN_DIR}/cyber/mainboard
+pathprepend ${BAZEL_BIN_DIR}/cyber/tools/cyber_recorder
+pathprepend ${BAZEL_BIN_DIR}/cyber/tools/cyber_monitor
+
 pathprepend /usr/local/fast-rtps/lib LD_LIBRARY_PATH
 
 # TODO(storypku):
