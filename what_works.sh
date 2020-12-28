@@ -10,6 +10,6 @@ bazel build //examples/...
 ## TODOs
 # 1) cyber_visualizer
 # 2) cyber release build
-# 3) Reorg docs
+# 3) Reorg tutorials and docs
 # 4) ROS 1/2 Inter-Op
 

@@ -27,6 +27,24 @@ Key benefits of using Apollo Cyber RT:
   - Building blocks specifically designed for AD scenarios
   - Plug and play your own AD system
 
+# Build/Installation
+
+## Dependencies
+
+You can run the following command to install CyberRT pre-requisites:
+
+```
+bash tools/install/install_prereqs.sh
+```
+
+`sudo` privilege is needed, and by default Fast-DDS is installed under
+`/usr/local/fast-rtps/`.
+
+## Release Build
+
+Binary releases for CyberRT is still a Work-In-Progress. Contribution is highly
+appreciated.
+
 # Documents
 
 - **_New!!_**
