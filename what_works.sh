@@ -24,13 +24,21 @@ bazel build //examples/...
 # bazel run //examples/cyber_py3:record_channel_info -- /tmp/test_writer.record
 # bazel run //cyber/python/cyber_py3/examples:record_trans -- /tmp/test_writer.record
 #
-## TODOs
-# 0.1 bazle run //examples/cyber_py3:service
-# 0.2 bazle run //examples/cyber_py3:client
-# 0.3 bazel run //examples/cyber_py3:timer # coredump
-# 0.4 bazel run //examples/cyber_py3:parameter # can't terminate
-# 1) cyber_visualizer
-# 2) cyber release build
-# 3) Reorg tutorials and docs
-# 4) ROS 1/2 Inter-Op
+## TODOs, or Road Map of CyberRT
+# Stage 1:
+# 1. bazel run //examples/cyber_py3:service
+# 2. bazel run //examples/cyber_py3:client
+# 3. bazel run //examples/cyber_py3:timer # coredump
+# 4. bazel run //examples/cyber_py3:parameter # can't terminate
+# 5. bazel test //cyber_py3/test:parameter_test # timeout forever
+# 6. bazel test //cyber_py3/test:cyber_timer_test # timeout forever
+# 7. external projects depending on CyberRT
+## Stage 2:
+# 1. CyberRT release build
+## Stage 3:
+# 1. ROS 1/2 Inter-Op
+# 2. pybind11 version of cyber_py3
+# 3. cyber_visualizer
+## Other TODOs:
+# 1. Reorg tutorials and docs
 

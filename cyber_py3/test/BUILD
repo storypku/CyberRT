@@ -31,15 +31,15 @@ py_test(
 )
 
 # FIXME(all): parameter_test seems to run forever
-# py_test(
-#    name = "parameter_test",
-#    timeout = "short",
-#    srcs = ["parameter_test.py"],
-#    deps = [
-#        "//cyber_py3:cyber",
-#        "//cyber_py3:parameter",
-#    ],
-#)
+py_test(
+    name = "parameter_test",
+    timeout = "short",
+    srcs = ["parameter_test.py"],
+    deps = [
+        "//cyber_py3:cyber",
+        "//cyber_py3:parameter",
+    ],
+)
 
 py_test(
     name = "cyber_time_test",
@@ -52,12 +52,12 @@ py_test(
 )
 
 # FIXME(all): cyber_timer_test can't terminate
-# py_test(
-#    name = "cyber_timer_test",
-#    timeout = "short",
-#    srcs = ["cyber_timer_test.py"],
-#    deps = [
-#        "//cyber_py3:cyber",
-#        "//cyber_py3:cyber_timer",
-#    ],
-#)
+py_test(
+    name = "cyber_timer_test",
+    timeout = "short",
+    srcs = ["cyber_timer_test.py"],
+    deps = [
+        "//cyber_py3:cyber",
+        "//cyber_py3:cyber_timer",
+    ],
+)
