@@ -17,9 +17,6 @@
 #ifndef CYBER_CLASS_LOADER_UTILITY_CLASS_LOADER_UTILITY_H_
 #define CYBER_CLASS_LOADER_UTILITY_CLASS_LOADER_UTILITY_H_
 
-#include <cassert>
-#include <cstdio>
-
 #include <map>
 #include <memory>
 #include <mutex>
@@ -33,7 +30,7 @@
 #include "cyber/common/log.h"
 
 /**
- *  class register implement
+ *  class register implementation
  */
 namespace apollo {
 namespace cyber {
@@ -43,46 +40,40 @@ class ClassLoader;
 
 namespace utility {
 
-using SharedLibraryPtr = std::shared_ptr<SharedLibrary>;
 using ClassClassFactoryMap =
     std::map<std::string, utility::AbstractClassFactoryBase*>;
 using BaseToClassFactoryMapMap = std::map<std::string, ClassClassFactoryMap>;
-using LibPathSharedLibVector =
-    std::vector<std::pair<std::string, SharedLibraryPtr>>;
-using ClassFactoryVector = std::vector<AbstractClassFactoryBase*>;
 
-BaseToClassFactoryMapMap& GetClassFactoryMapMap();
 std::recursive_mutex& GetClassFactoryMapMapMutex();
-LibPathSharedLibVector& GetLibPathSharedLibVector();
-std::recursive_mutex& GetLibPathSharedLibMutex();
+
 ClassClassFactoryMap& GetClassFactoryMapByBaseClass(
-    const std::string& typeid_base_class_name);
+    const std::string& base_typeid);
+
 std::string GetCurLoadingLibraryName();
-void SetCurLoadingLibraryName(const std::string& library_name);
 ClassLoader* GetCurActiveClassLoader();
-void SetCurActiveClassLoader(ClassLoader* loader);
-bool IsLibraryLoaded(const std::string& library_path, ClassLoader* loader);
-bool IsLibraryLoadedByAnybody(const std::string& library_path);
+
+bool IsLibraryLoaded(const std::string& library_path);
 bool LoadLibrary(const std::string& library_path, ClassLoader* loader);
 void UnloadLibrary(const std::string& library_path, ClassLoader* loader);
+
 template <typename Derived, typename Base>
 void RegisterClass(const std::string& class_name,
                    const std::string& base_class_name);
+
 template <typename Base>
 Base* CreateClassObj(const std::string& class_name, ClassLoader* loader);
+
 template <typename Base>
 std::vector<std::string> GetValidClassNames(ClassLoader* loader);
 
 template <typename Derived, typename Base>
 void RegisterClass(const std::string& class_name,
                    const std::string& base_class_name) {
-  AINFO << "registerclass:" << class_name << "," << base_class_name << ","
-        << GetCurLoadingLibraryName();
-
+  AINFO << "Register class:" << class_name << "," << base_class_name;
   utility::AbstractClassFactory<Base>* new_class_factory_obj =
       new utility::ClassFactory<Derived, Base>(class_name, base_class_name);
-  new_class_factory_obj->AddOwnedClassLoader(GetCurActiveClassLoader());
-  new_class_factory_obj->SetRelativeLibraryPath(GetCurLoadingLibraryName());
+  auto curr_active_loader = GetCurActiveClassLoader();
+  new_class_factory_obj->AddOwnedClassLoader(curr_active_loader);
 
   GetClassFactoryMapMapMutex().lock();
   ClassClassFactoryMap& factory_map =
@@ -113,7 +104,7 @@ Base* CreateClassObj(const std::string& class_name, ClassLoader* loader) {
 
 template <typename Base>
 std::vector<std::string> GetValidClassNames(ClassLoader* loader) {
-  std::lock_guard<std::recursive_mutex> lck(GetClassFactoryMapMapMutex());
+  std::lock_guard<std::recursive_mutex> lock(GetClassFactoryMapMapMutex());
 
   ClassClassFactoryMap& factoryMap =
       GetClassFactoryMapByBaseClass(typeid(Base).name());

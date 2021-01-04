@@ -26,14 +26,12 @@
 #include "cyber/class_loader/test/base.h"
 #include "cyber/cyber.h"
 
-const char LIBRARY_1[] =
-    "cyber/class_loader/test/libplugin1.so";
-const char LIBRARY_2[] =
-    "cyber/class_loader/test/libplugin2.so";
+const char LIBRARY_1[] = "cyber/class_loader/test/libplugin1.so";
+const char LIBRARY_2[] = "cyber/class_loader/test/libplugin2.so";
 
 using apollo::cyber::class_loader::ClassLoader;
 using apollo::cyber::class_loader::ClassLoaderManager;
-using apollo::cyber::class_loader::utility::IsLibraryLoadedByAnybody;
+using apollo::cyber::class_loader::utility::IsLibraryLoaded;
 
 TEST(ClassLoaderTest, createClassObj) {
   ClassLoader loader1(LIBRARY_1);
@@ -76,13 +74,13 @@ TEST(ClassLoaderTest, multiTimesLoadunload) {
   ClassLoader loader1(LIBRARY_1);
   ASSERT_TRUE(loader1.LoadLibrary());
   loader1.LoadLibrary();
-  ASSERT_TRUE(IsLibraryLoadedByAnybody(LIBRARY_1));
+  ASSERT_TRUE(IsLibraryLoaded(LIBRARY_1));
   loader1.UnloadLibrary();
-  ASSERT_TRUE(IsLibraryLoadedByAnybody(LIBRARY_1));
+  ASSERT_TRUE(IsLibraryLoaded(LIBRARY_1));
   loader1.UnloadLibrary();
-  ASSERT_TRUE(IsLibraryLoadedByAnybody(LIBRARY_1));
+  ASSERT_TRUE(IsLibraryLoaded(LIBRARY_1));
   loader1.UnloadLibrary();
-  ASSERT_FALSE(IsLibraryLoadedByAnybody(LIBRARY_1));
+  ASSERT_FALSE(IsLibraryLoaded(LIBRARY_1));
 }
 
 TEST(ClassLoaderManagerTest, testClassLoaderManager) {
@@ -169,7 +167,7 @@ TEST(ClassLoaderTest, loadLibThreadSafety) {
     delete (client_threads[i]);
   }
 
-  loaderMgr.UnloadAllLibrary();
+  loaderMgr.UnloadAllLibraries();
   ASSERT_FALSE(loaderMgr.IsLibraryValid(LIBRARY_1));
 }
 
@@ -179,8 +177,8 @@ TEST(ClassLoaderTest, util_test) {
   ClassLoader loader1(LIBRARY_1);
   apollo::cyber::class_loader::utility::LoadLibrary("1", &loader1);
   apollo::cyber::class_loader::utility::UnloadLibrary("1", nullptr);
-  apollo::cyber::class_loader::utility::IsLibraryLoaded(LIBRARY_1, &loader1);
-  apollo::cyber::class_loader::utility::IsLibraryLoaded(LIBRARY_2, &loader1);
+  apollo::cyber::class_loader::utility::IsLibraryLoaded(LIBRARY_1);
+  apollo::cyber::class_loader::utility::IsLibraryLoaded(LIBRARY_2);
 }
 
 int main(int argc, char** argv) {

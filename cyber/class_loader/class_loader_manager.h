@@ -35,8 +35,10 @@ class ClassLoaderManager {
   virtual ~ClassLoaderManager();
 
   bool LoadLibrary(const std::string& library_path);
-  void UnloadAllLibrary();
+  void UnloadAllLibraries();
+
   bool IsLibraryValid(const std::string& library_path);
+
   template <typename Base>
   std::shared_ptr<Base> CreateClassObj(const std::string& class_name);
   template <typename Base>
@@ -44,6 +46,7 @@ class ClassLoaderManager {
                                        const std::string& library_path);
   template <typename Base>
   bool IsClassValid(const std::string& class_name);
+
   template <typename Base>
   std::vector<std::string> GetValidClassNames();
 

@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load("//tools/bazel:cpplint.bzl", "cpplint")
 
 package(default_visibility = ["//visibility:public"])
@@ -12,9 +12,9 @@ cc_library(
 cc_binary(
     name = "libplugin1.so",
     testonly = True,
+    srcs = ["plugin1.cc"],
     linkshared = True,
     linkstatic = False,
-    srcs = ["plugin1.cc"],
     deps = [
         ":base",
         "//cyber/class_loader:class_loader_manager",
@@ -24,9 +24,9 @@ cc_binary(
 cc_binary(
     name = "libplugin2.so",
     testonly = True,
+    srcs = ["plugin2.cc"],
     linkshared = True,
     linkstatic = False,
-    srcs = ["plugin2.cc"],
     deps = [
         ":base",
         "//cyber/class_loader:class_loader_manager",

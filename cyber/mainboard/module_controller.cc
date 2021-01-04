@@ -31,7 +31,7 @@ void ModuleController::Clear() {
     component->Shutdown();
   }
   component_list_.clear();  // keep alive
-  class_loader_manager_.UnloadAllLibrary();
+  class_loader_manager_.UnloadAllLibraries();
 }
 
 bool ModuleController::LoadAll() {

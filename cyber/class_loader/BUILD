@@ -18,8 +18,8 @@ cc_library(
     ],
     deps = [
         "//cyber:init",
-        "//cyber/common:log",
         "//cyber/class_loader/shared_library",
+        "//cyber/common:log",
     ],
 )
 

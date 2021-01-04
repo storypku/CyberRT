@@ -31,24 +31,26 @@ namespace utility {
 class AbstractClassFactoryBase {
  public:
   AbstractClassFactoryBase(const std::string& class_name,
-                           const std::string& base_class_name);
-  virtual ~AbstractClassFactoryBase();
+                           const std::string& base_class_name)
+      : class_name_(class_name), base_class_name_(base_class_name) {}
+  virtual ~AbstractClassFactoryBase() = default;
 
-  void SetRelativeLibraryPath(const std::string& library_path);
+  void SetLibraryPath(const std::string& library_path);
+
   void AddOwnedClassLoader(ClassLoader* loader);
   void RemoveOwnedClassLoader(const ClassLoader* loader);
   bool IsOwnedBy(const ClassLoader* loader);
   bool IsOwnedByAnybody();
-  std::vector<ClassLoader*> GetRelativeClassLoaders();
-  const std::string GetRelativeLibraryPath() const;
-  const std::string GetBaseClassName() const;
-  const std::string GetClassName() const;
+
+  const std::string& GetLibraryPath() const { return library_path_; }
+  const std::string& GetBaseClassName() const { return base_class_name_; }
+  const std::string& GetClassName() const { return class_name_; }
 
  protected:
   std::vector<ClassLoader*> relative_class_loaders_;
-  std::string relative_library_path_;
-  std::string base_class_name_;
+  std::string library_path_;
   std::string class_name_;
+  std::string base_class_name_;
 };
 
 template <typename Base>
@@ -60,10 +62,9 @@ class AbstractClassFactory : public AbstractClassFactoryBase {
 
   virtual Base* CreateObj() const = 0;
 
- private:
-  AbstractClassFactory();
-  AbstractClassFactory(const AbstractClassFactory&);
-  AbstractClassFactory& operator=(const AbstractClassFactory&);
+ public:
+  AbstractClassFactory(const AbstractClassFactory&) = delete;
+  AbstractClassFactory& operator=(const AbstractClassFactory&) = delete;
 };
 
 template <typename ClassObject, typename Base>

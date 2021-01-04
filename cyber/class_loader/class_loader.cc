@@ -18,6 +18,7 @@
 namespace apollo {
 namespace cyber {
 namespace class_loader {
+
 ClassLoader::ClassLoader(const std::string& library_path)
     : library_path_(library_path),
       loadlib_ref_count_(0),
@@ -28,13 +29,13 @@ ClassLoader::ClassLoader(const std::string& library_path)
 ClassLoader::~ClassLoader() { UnloadLibrary(); }
 
 bool ClassLoader::IsLibraryLoaded() {
-  return utility::IsLibraryLoaded(library_path_, this);
+  return utility::IsLibraryLoaded(library_path_);
 }
 
 bool ClassLoader::LoadLibrary() {
   std::lock_guard<std::mutex> lck(loadlib_ref_count_mutex_);
   ++loadlib_ref_count_;
-  AINFO << "Begin LoadLibrary: " << library_path_;
+  AINFO << "Begin to load library: " << library_path_;
   return utility::LoadLibrary(library_path_, this);
 }
 
@@ -59,7 +60,7 @@ int ClassLoader::UnloadLibrary() {
   return loadlib_ref_count_;
 }
 
-const std::string ClassLoader::GetLibraryPath() const { return library_path_; }
+const std::string& ClassLoader::GetLibraryPath() const { return library_path_; }
 
 }  // namespace class_loader
 }  // namespace cyber

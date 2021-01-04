@@ -30,21 +30,27 @@ namespace cyber {
 namespace class_loader {
 
 /**
- *  for library load,createclass object
+ * @Desc: for library load, create class object
  */
 class ClassLoader {
  public:
   explicit ClassLoader(const std::string& library_path);
   virtual ~ClassLoader();
 
-  bool IsLibraryLoaded();
+ public:
   bool LoadLibrary();
   int UnloadLibrary();
-  const std::string GetLibraryPath() const;
+  bool IsLibraryLoaded();
+
+  const std::string& GetLibraryPath() const;
+
+ public:
   template <typename Base>
   std::vector<std::string> GetValidClassNames();
+
   template <typename Base>
   std::shared_ptr<Base> CreateClassObj(const std::string& class_name);
+
   template <typename Base>
   bool IsClassValid(const std::string& class_name);
 

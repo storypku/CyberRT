@@ -15,6 +15,7 @@
  *****************************************************************************/
 
 #include <iostream>
+
 #include "cyber/class_loader/class_loader.h"
 #include "cyber/class_loader/test/base.h"
 

@@ -74,12 +74,13 @@ int ClassLoaderManager::UnloadLibrary(const std::string& library_path) {
   return num_remain_unload;
 }
 
-void ClassLoaderManager::UnloadAllLibrary() {
+void ClassLoaderManager::UnloadAllLibraries() {
   std::vector<std::string> valid_libraries = GetAllValidLibPath();
   for (auto& lib : valid_libraries) {
     UnloadLibrary(lib);
   }
 }
+
 }  // namespace class_loader
 }  // namespace cyber
 }  // namespace apollo
