@@ -9,8 +9,7 @@ sudo apt-get update && \
         ncurses-dev \
         uuid-dev \
         libasio-dev \
-        libtinyxml2-dev \
-        libpoco-dev
+        libtinyxml2-dev
 
 DEST_DIR="/usr/local/fast-rtps"
 if [[ -d "${DEST_DIR}" ]]; then
