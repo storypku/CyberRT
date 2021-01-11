@@ -7,19 +7,25 @@ cc_library(
     name = "class_loader",
     srcs = [
         "class_loader.cc",
-        "utility/class_factory.cc",
         "utility/class_loader_utility.cc",
     ],
     hdrs = [
         "class_loader.h",
         "class_loader_register_macro.h",
-        "utility/class_factory.h",
         "utility/class_loader_utility.h",
     ],
     deps = [
+        ":class_factory",
         "//cyber:init",
         "//cyber/class_loader/shared_library",
         "//cyber/common:log",
+    ],
+)
+
+cc_library(
+    name = "class_factory",
+    hdrs = [
+        "utility/class_factory.h",
     ],
 )
 

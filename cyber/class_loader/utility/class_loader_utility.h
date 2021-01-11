@@ -49,7 +49,6 @@ std::recursive_mutex& GetClassFactoryMapMapMutex();
 ClassClassFactoryMap& GetClassFactoryMapByBaseClass(
     const std::string& base_typeid);
 
-std::string GetCurLoadingLibraryName();
 ClassLoader* GetCurActiveClassLoader();
 
 bool IsLibraryLoaded(const std::string& library_path);

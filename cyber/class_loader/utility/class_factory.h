@@ -17,8 +17,6 @@
 #define CYBER_CLASS_LOADER_UTILITY_CLASS_FACTORY_H_
 
 #include <string>
-#include <typeinfo>
-#include <vector>
 
 namespace apollo {
 namespace cyber {
@@ -35,19 +33,15 @@ class AbstractClassFactoryBase {
       : class_name_(class_name), base_class_name_(base_class_name) {}
   virtual ~AbstractClassFactoryBase() = default;
 
-  void SetLibraryPath(const std::string& library_path);
-
-  void AddOwnedClassLoader(ClassLoader* loader);
-  void RemoveOwnedClassLoader(const ClassLoader* loader);
-  bool IsOwnedBy(const ClassLoader* loader);
-  bool IsOwnedByAnybody();
+  void SetLibraryPath(const std::string& library_path) {
+      library_path_ = library_path;
+  }
 
   const std::string& GetLibraryPath() const { return library_path_; }
   const std::string& GetBaseClassName() const { return base_class_name_; }
   const std::string& GetClassName() const { return class_name_; }
 
  protected:
-  std::vector<ClassLoader*> relative_class_loaders_;
   std::string library_path_;
   std::string class_name_;
   std::string base_class_name_;
