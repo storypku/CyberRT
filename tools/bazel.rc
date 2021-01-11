@@ -20,6 +20,8 @@ build --show_timestamps
 # Work around the sandbox issue.
 build --spawn_strategy=standalone
 
+build --action_env=CYBER_PATH
+
 # Enable colorful output of GCC
 build --cxxopt="-fdiagnostics-color=always"
 

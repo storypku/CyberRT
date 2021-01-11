@@ -47,6 +47,8 @@ cc_test(
     ],
     deps = [
         ":shared_library",
+        "//cyber/common:environment",
+        "//cyber/common:file",
         "@com_google_googletest//:gtest_main",
     ],
 )

@@ -14,16 +14,23 @@
  * limitations under the License.
  *****************************************************************************/
 
-#include "cyber/class_loader/shared_library/shared_library.h"
-
 #include <cmath>
+
+#include "cyber/class_loader/shared_library/shared_library.h"
+#include "cyber/common/environment.h"
+#include "cyber/common/file.h"
+
 
 #include "gtest/gtest.h"
 
 namespace {
 
-const std::string& SAMPLE_LIB =
-    "/apollo/bazel-bin/cyber/class_loader/shared_library/libsample.so";
+std::string determine_sample_lib_path() {
+  auto root = ::apollo::cyber::common::WorkRoot();
+  auto result = ::apollo::cyber::common::GetAbsolutePath(
+      root, "bazel-bin/cyber/class_loader/shared_library/libsample.so");
+  return result;
+}
 constexpr double epsilon = 1.0e-8;
 
 }  // namespace
@@ -37,10 +44,11 @@ TEST(SharedLibraryTest, symbol_test_1) {
   EXPECT_TRUE(shared_lib->GetPath().empty());
   EXPECT_FALSE(shared_lib->IsLoaded());
 
-  EXPECT_NO_THROW(shared_lib->Load(SAMPLE_LIB));
+  auto sample_path = determine_sample_lib_path();
+  EXPECT_NO_THROW(shared_lib->Load(sample_path));
   EXPECT_TRUE(shared_lib->IsLoaded());
 
-  EXPECT_THROW(shared_lib->Load(SAMPLE_LIB), LibraryAlreadyLoadedException);
+  EXPECT_THROW(shared_lib->Load(sample_path), LibraryAlreadyLoadedException);
 
   EXPECT_TRUE(shared_lib->HasSymbol("sample_add"));
   auto symbol = shared_lib->GetSymbol("sample_add");
@@ -53,7 +61,8 @@ TEST(SharedLibraryTest, symbol_test_1) {
 }
 
 TEST(SharedLibraryTest, symbol_test_2) {
-  auto shared_lib = std::make_shared<SharedLibrary>(SAMPLE_LIB);
+  auto sample_path = determine_sample_lib_path();
+  auto shared_lib = std::make_shared<SharedLibrary>(sample_path);
   EXPECT_TRUE(shared_lib->IsLoaded());
 
   typedef double (*UnaryFunc)(double);
